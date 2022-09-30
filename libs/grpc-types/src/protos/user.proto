@@ -20,7 +20,7 @@ message UserCreateDto{
 }
 
 message UserCreateAck{
-  string _id = 1;
+  string id = 1;
   string fullName = 2;
   string nickname = 3;
   UserRole role = 5;
