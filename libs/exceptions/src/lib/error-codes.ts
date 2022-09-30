@@ -1,0 +1,5 @@
+export enum ErrorCodes {
+  //500
+  GENERAL_SERVER_ERROR = 500100,
+  USERNAME_ALREADY_TAKEN = 500101
+}
