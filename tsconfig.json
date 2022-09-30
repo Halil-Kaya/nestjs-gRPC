@@ -17,6 +17,19 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "exceptions/exceptions": [
+        "libs/exceptions/src"
+      ],
+      "exceptions/exceptions/*": [
+        "libs/exceptions/src/*"
+      ],
+      "core/core": [
+        "libs/core/src"
+      ],
+      "core/core/*": [
+        "libs/core/src/*"
+      ]
+    }
   }
 }
