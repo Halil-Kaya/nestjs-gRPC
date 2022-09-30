@@ -12,9 +12,6 @@ export class UserController {
   }
 
   async create(data: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
-    console.log("gelenData -> ", data);
-    const result = await this.userService.create(data);
-    console.log({ result });
-    return null;
+    return this.userService.create(data);
   }
 }

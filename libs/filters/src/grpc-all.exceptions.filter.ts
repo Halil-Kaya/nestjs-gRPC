@@ -19,8 +19,7 @@ export class GrpcAllExceptionsFilter extends BaseRpcExceptionFilter {
     this.logger.error(`[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`);
     const errorMetadata = new Metadata();
     errorMetadata.add("customError", JSON.stringify(exception));
-    return throwError(() => {
-      metadata : exception;
-    });
+    exception.metadata = errorMetadata;
+    return throwError(() => exception);
   }
 }

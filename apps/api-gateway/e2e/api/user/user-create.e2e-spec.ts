@@ -1,5 +1,7 @@
 import { createUser } from "../../common/user.helpers";
 import { UserProto } from "grpc-types/grpc-types";
+import { MetaInterface } from "../../../src/core/Interceptors/transform.interceptor";
+import { ErrorCodes } from "exceptions/exceptions";
 
 
 it("should create user", async () => {
@@ -16,7 +18,7 @@ it("should create user", async () => {
   const result = <UserProto.UserCreateAck>data.result;
   expect(result.fullName).toBe(reqDto.fullName);
   expect(result.nickname).toBe(reqDto.nickname);
-  expect(result.id).toBeDefined();
+  expect(result._id).toBeDefined();
   expect(result.createdAt).toBeDefined();
 });
 
@@ -35,6 +37,7 @@ it("should throw error if nickname is taken", async () => {
     await createUser(reqDto);
     expect(undefined).toBeDefined();
   } catch (err) {
-    console.log(err.response.data);
+    const result = <MetaInterface>err.response.data.meta;
+    expect(result.errorCode).toBe(ErrorCodes.USERNAME_ALREADY_TAKEN);
   }
 });

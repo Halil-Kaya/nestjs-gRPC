@@ -14,12 +14,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
-    console.log(exception);
-    if (!exception.isCustomError) {
-      exception = new GeneralServerErrorException();
-    }
     if (exception.metadata) {
       exception = JSON.parse(exception.metadata.get("customError")[0]);
+    }
+    if (!exception.isCustomError) {
+      exception = new GeneralServerErrorException();
     }
     this.logger.error(
       `[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`

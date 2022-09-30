@@ -15,14 +15,7 @@ export class UserService {
     if (isNicknameTaken) {
       throw new NicknameAlreadyTakenExceptions();
     }
-    const createdUser = await this.userRepository.create(dto, session);
-    return {
-      id: createdUser.id,
-      fullName: createdUser.fullName,
-      role: createdUser.role,
-      nickname: createdUser.nickname,
-      createdAt: createdUser.createdAt
-    };
+    return this.userRepository.create(dto, session);
   }
 
   async findById(id: string): Promise<User> {
