@@ -16,7 +16,7 @@ it("should create user", async () => {
   const result = <UserProto.UserCreateAck>data.result;
   expect(result.fullName).toBe(reqDto.fullName);
   expect(result.nickname).toBe(reqDto.nickname);
-  expect(result.Id).toBeDefined();
+  expect(result.id).toBeDefined();
   expect(result.createdAt).toBeDefined();
 });
 

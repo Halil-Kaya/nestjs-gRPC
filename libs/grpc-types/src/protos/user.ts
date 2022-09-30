@@ -17,7 +17,7 @@ export interface UserCreateDto {
 }
 
 export interface UserCreateAck {
-  id: string;
+  _id: string;
   fullName: string;
   nickname: string;
   role: UserRole;
@@ -35,7 +35,7 @@ export interface UserServiceController {
 }
 
 export function UserServiceControllerMethods() {
-  return function (constructor: Function) {
+  return function(constructor: Function) {
     const grpcMethods: string[] = ["create"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

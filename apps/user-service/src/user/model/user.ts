@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Schema as MongooseSchema, Types } from "mongoose";
 import { hashSync } from "bcryptjs";
 
 export type UserDocument = User & Document;
@@ -15,6 +15,9 @@ export enum UserRole {
   timestamps: true
 })
 export class User {
+  @Prop({ type: MongooseSchema.Types.ObjectId, default: Types.ObjectId })
+  public _id: string;
+
   id: string;
 
   @Prop({ type: String, required: true })
