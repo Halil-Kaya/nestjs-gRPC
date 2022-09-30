@@ -41,6 +41,12 @@
       ],
       "grpc-types/grpc-types/*": [
         "libs/grpc-types/src/*"
+      ],
+      "filters/filters": [
+        "libs/filters/src"
+      ],
+      "filters/filters/*": [
+        "libs/filters/src/*"
       ]
     }
   }

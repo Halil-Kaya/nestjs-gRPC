@@ -27,7 +27,11 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^9.1.2",
+    "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "mongoose": "^6.6.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
@@ -63,7 +67,7 @@
       "ts"
     ],
     "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
+    "testRegex": ".*\\.e2e-spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
@@ -79,7 +83,8 @@
     "moduleNameMapper": {
       "^exceptions/exceptions(|/.*)$": "<rootDir>/libs/exceptions/src/$1",
       "^core/core(|/.*)$": "<rootDir>/libs/core/src/$1",
-      "^grpc-types/grpc-types(|/.*)$": "<rootDir>/libs/grpc-types/src/$1"
+      "^grpc-types/grpc-types(|/.*)$": "<rootDir>/libs/grpc-types/src/$1",
+      "^filters/filters(|/.*)$": "<rootDir>/libs/filters/src/$1"
     }
   }
 }

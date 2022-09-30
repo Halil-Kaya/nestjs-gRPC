@@ -6,7 +6,14 @@
   "root": "apps/api-gateway",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+    "tsConfigPath": "apps/api-gateway/tsconfig.app.json",
+    "assets": [
+      {
+        "include": "./libs/grpc-types/src/protos/*.proto",
+        "outDir": "./dist/libs/grpc-types/src/protos"
+      }
+    ],
+    "watchAssets": true
   },
   "projects": {
     "api-gateway": {
@@ -70,6 +77,15 @@
       "sourceRoot": "libs/grpc-types/src",
       "compilerOptions": {
         "tsConfigPath": "libs/grpc-types/tsconfig.lib.json"
+      }
+    },
+    "filters": {
+      "type": "library",
+      "root": "libs/filters",
+      "entryFile": "index",
+      "sourceRoot": "libs/filters/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/filters/tsconfig.lib.json"
       }
     }
   }
