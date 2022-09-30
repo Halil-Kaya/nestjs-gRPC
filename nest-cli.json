@@ -62,6 +62,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/core/tsconfig.lib.json"
       }
+    },
+    "grpc-types": {
+      "type": "library",
+      "root": "libs/grpc-types",
+      "entryFile": "index",
+      "sourceRoot": "libs/grpc-types/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/grpc-types/tsconfig.lib.json"
+      }
     }
   }
 }

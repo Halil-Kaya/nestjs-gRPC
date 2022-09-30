@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package user;
+import "google/protobuf/timestamp.proto";
+
+service UserService{
+  rpc Create(UserCreateDto) returns (UserCreateAck){};
+}
+
+enum UserRole{
+  ADMIN = 0;
+  NORMAL = 1;
+}
+
+message UserCreateDto{
+  string fullName = 1;
+  string nickname = 2;
+  string password = 3;
+  UserRole role = 4;
+}
+
+message UserCreateAck{
+  string _id = 1;
+  string fullName = 2;
+  string nickname = 3;
+  UserRole role = 5;
+  google.protobuf.Timestamp createdAt = 4;
+}

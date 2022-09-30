@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "user-proto:generate": "protoc --ts_proto_opt=nestJs=true --ts_proto_opt=useDate=true --ts_proto_opt=unrecognizedEnum=false --ts_proto_opt=snakeToCamel=false --ts_proto_opt=snakeToCamel=keys_json --ts_proto_opt=stringEnums=true --ts_proto_out=. ./libs/grpc-types/src/protos/user.proto --ts_proto_opt=esModuleInterop=true",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -29,7 +30,8 @@
     "@nestjs/platform-express": "^9.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "ts-proto": "^1.126.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
@@ -76,7 +78,8 @@
     ],
     "moduleNameMapper": {
       "^exceptions/exceptions(|/.*)$": "<rootDir>/libs/exceptions/src/$1",
-      "^core/core(|/.*)$": "<rootDir>/libs/core/src/$1"
+      "^core/core(|/.*)$": "<rootDir>/libs/core/src/$1",
+      "^grpc-types/grpc-types(|/.*)$": "<rootDir>/libs/grpc-types/src/$1"
     }
   }
 }

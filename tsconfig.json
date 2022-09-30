@@ -29,6 +29,18 @@
       ],
       "core/core/*": [
         "libs/core/src/*"
+      ],
+      "proto/proto": [
+        "libs/proto/src"
+      ],
+      "proto/proto/*": [
+        "libs/proto/src/*"
+      ],
+      "grpc-types/grpc-types": [
+        "libs/grpc-types/src"
+      ],
+      "grpc-types/grpc-types/*": [
+        "libs/grpc-types/src/*"
       ]
     }
   }
