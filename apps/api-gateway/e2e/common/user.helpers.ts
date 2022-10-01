@@ -1,6 +1,6 @@
 import axios from "axios";
-import { base_uri } from "./index";
 import { UserProto } from "grpc-types/grpc-types";
+import { base_uri } from "./index";
 
 const uri = base_uri + "user/";
 

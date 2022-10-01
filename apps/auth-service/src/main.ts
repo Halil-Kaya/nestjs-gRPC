@@ -1,9 +1,8 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { AuthProto, UserProto } from "grpc-types/grpc-types";
+import { AuthProto } from "grpc-types/grpc-types";
 import { join } from "path";
-
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +11,7 @@ async function bootstrap() {
     options: {
       package: AuthProto.AUTH_PACKAGE_NAME,
       protoPath: join(__dirname, "./auth.proto"),
+      url: "localhost:50051",
       loader: {
         keepCase: true,
         enums: String

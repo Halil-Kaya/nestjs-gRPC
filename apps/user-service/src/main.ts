@@ -11,6 +11,7 @@ async function bootstrap() {
     options: {
       package: UserProto.USER_PACKAGE_NAME,
       protoPath: join(__dirname, "./user.proto"),
+      url: "localhost:50050",
       loader: {
         keepCase: true,
         enums: String

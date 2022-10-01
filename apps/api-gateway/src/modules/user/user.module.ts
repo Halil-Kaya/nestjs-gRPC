@@ -12,7 +12,8 @@ import { UserProto } from "grpc-types/grpc-types";
         transport: Transport.GRPC,
         options: {
           package: UserProto.USER_PACKAGE_NAME,
-          protoPath: join(__dirname, "./user.proto")
+          protoPath: join(__dirname, "./user.proto"),
+          url: "localhost:50050"
         }
       }
     ])

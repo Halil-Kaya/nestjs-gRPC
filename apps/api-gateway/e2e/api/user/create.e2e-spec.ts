@@ -1,7 +1,7 @@
-import { createUser } from "../../common/user.helpers";
 import { UserProto } from "grpc-types/grpc-types";
-import { MetaInterface } from "../../../src/core/Interceptors/transform.interceptor";
 import { ErrorCodes } from "exceptions/exceptions";
+import { MetaInterface } from "interceptors/interceptors";
+import { createUser } from "../../common/user.helpers";
 
 
 it("should create user", async () => {
