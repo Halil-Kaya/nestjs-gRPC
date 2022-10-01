@@ -1,8 +1,27 @@
-import { NestFactory } from '@nestjs/core';
-import { AuthServiceModule } from './auth-service.module';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { MicroserviceOptions, Transport } from "@nestjs/microservices";
+import { AuthProto, UserProto } from "grpc-types/grpc-types";
+import { join } from "path";
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AuthServiceModule);
-  await app.listen(3000);
+  const app = await NestFactory.create(AppModule);
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      package: AuthProto.AUTH_PACKAGE_NAME,
+      protoPath: join(__dirname, "./auth.proto"),
+      loader: {
+        keepCase: true,
+        enums: String
+      }
+    }
+  });
+  await app.startAllMicroservices();
+  return app;
 }
-bootstrap();
+
+bootstrap().then(async (app) => {
+  console.log(`auth-service microservice is running`);
+});

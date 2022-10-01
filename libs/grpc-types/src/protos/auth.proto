@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService{
+  rpc Login(LoginDto) returns (LoginAck){};
+}
+
+message LoginDto{
+  string nickname = 1;
+  string password = 2;
+}
+
+message LoginAck{
+  string token = 1;
+}
