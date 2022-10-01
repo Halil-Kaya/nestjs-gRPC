@@ -47,6 +47,12 @@
       ],
       "filters/filters/*": [
         "libs/filters/src/*"
+      ],
+      "interceptors/interceptors": [
+        "libs/interceptors/src"
+      ],
+      "interceptors/interceptors/*": [
+        "libs/interceptors/src/*"
       ]
     }
   }
