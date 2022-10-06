@@ -53,6 +53,12 @@
       ],
       "interceptors/interceptors/*": [
         "libs/interceptors/src/*"
+      ],
+      "middlewares/middlewares": [
+        "libs/middlewares/src"
+      ],
+      "middlewares/middlewares/*": [
+        "libs/middlewares/src/*"
       ]
     }
   }

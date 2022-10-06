@@ -26,6 +26,7 @@
     "@grpc/proto-loader": "^0.7.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^9.0.0",
     "@nestjs/microservices": "^9.1.2",
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
@@ -85,7 +86,8 @@
       "^core/core(|/.*)$": "<rootDir>/libs/core/src/$1",
       "^grpc-types/grpc-types(|/.*)$": "<rootDir>/libs/grpc-types/src/$1",
       "^filters/filters(|/.*)$": "<rootDir>/libs/filters/src/$1",
-      "^interceptors/interceptors(|/.*)$": "<rootDir>/libs/interceptors/src/$1"
+      "^interceptors/interceptors(|/.*)$": "<rootDir>/libs/interceptors/src/$1",
+      "^middlewares/middlewares(|/.*)$": "<rootDir>/libs/middlewares/src/$1"
     }
   }
 }

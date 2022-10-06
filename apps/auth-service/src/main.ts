@@ -6,11 +6,12 @@ import { join } from "path";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  await app.init();
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
       package: AuthProto.AUTH_PACKAGE_NAME,
-      protoPath: join(__dirname, "./auth.proto"),
+      protoPath: join(__dirname, "./../../../libs/grpc-types/src/protos/auth.proto"),
       url: "localhost:50051",
       loader: {
         keepCase: true,

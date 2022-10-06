@@ -11,15 +11,20 @@ it("Should user get token", async () => {
     password: "123456"
   };
 
-  const res1 = await createUser(reqDto);
-
-  expect(res1.status).toBe(201);
+  const { data: data1, status: status1 } = await createUser(reqDto);
+  expect(status1).toBe(201);
+  const res1 = <UserProto.UserCreateAck>data1.result;
+  expect(res1).toBeDefined();
 
   const reqDto2: AuthProto.LoginDto = {
     nickname: reqDto.nickname,
     password: reqDto.password
   };
-  const { status, data } = await login(reqDto2);
-  const result = <AuthProto.LoginAck>data.result;
-  console.log(result);
+  const { data: data2 } = await login(reqDto2);
+  const result = <AuthProto.LoginAck>data2.result;
+  expect(result).toBeDefined();
+  expect(result.token).toBeDefined();
+  const payload = JSON.parse(Buffer.from(result.token.split(".")[1], "base64").toString());
+  expect(res1._id).toBe(payload._id);
 });
+

@@ -3,7 +3,7 @@ import { UserRepository } from "../repository/user.repository";
 import { ClientSession } from "mongoose";
 import { User } from "../model/user";
 import { UserProto } from "grpc-types/grpc-types";
-import { NicknameAlreadyTakenExceptions } from "exceptions/exceptions";
+import { NicknameAlreadyTakenException } from "exceptions/exceptions";
 
 @Injectable()
 export class UserService {
@@ -13,7 +13,7 @@ export class UserService {
   async create(dto: UserProto.UserCreateDto, session?: ClientSession): Promise<UserProto.UserCreateAck> {
     const isNicknameTaken = await this.userRepository.isNicknameTaken(dto.nickname);
     if (isNicknameTaken) {
-      throw new NicknameAlreadyTakenExceptions();
+      throw new NicknameAlreadyTakenException();
     }
     return this.userRepository.create(dto, session);
   }

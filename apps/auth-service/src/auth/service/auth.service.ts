@@ -1,14 +1,30 @@
-import { Injectable } from "@nestjs/common";
-import { AuthProto } from "grpc-types/grpc-types";
+import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
+import { AuthProto, UserProto } from "grpc-types/grpc-types";
+import { ClientGrpc } from "@nestjs/microservices";
+import { InvalidCredentialsException } from "exceptions/exceptions";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
-export class AuthService {
-  constructor() {
+export class AuthService implements OnModuleInit {
+  private userService: UserProto.UserServiceClient;
+
+  constructor(@Inject(UserProto.USER_PACKAGE_NAME) private client: ClientGrpc,
+              private readonly jwtService: JwtService) {
   }
 
-  login(dto: AuthProto.LoginDto): AuthProto.LoginAck {
+  onModuleInit() {
+    this.userService = this.client.getService<UserProto.UserServiceClient>(UserProto.USER_SERVICE_NAME);
+  }
+
+  async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
+    const user = await this.userService.findByNickname({ nickname: dto.nickname }).toPromise();
+    if (!user) {
+      throw new InvalidCredentialsException();
+    }
     return {
-      token: "sadasdasd"
+      token: this.jwtService.sign({
+        _id: user._id
+      })
     };
   }
 

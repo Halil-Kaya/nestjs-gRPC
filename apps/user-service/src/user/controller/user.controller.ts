@@ -14,4 +14,13 @@ export class UserController {
   async create(data: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
     return this.userService.create(data);
   }
+
+  async findByNickname(data: UserProto.FindByNicknameDto): Promise<UserProto.User> {
+    return this.userService.findByNickname(data.nickname);
+  }
+
+  async findById(data: UserProto.FindByIdDto): Promise<UserProto.User> {
+    return this.userService.findById(data._id);
+  }
+
 }

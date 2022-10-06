@@ -5,15 +5,11 @@
   "monorepo": true,
   "root": "apps/api-gateway",
   "compilerOptions": {
-    "webpack": true,
-    "tsConfigPath": "apps/api-gateway/tsconfig.app.json",
     "assets": [
-      {
-        "include": "./libs/grpc-types/src/protos/*.proto",
-        "outDir": "./dist/libs/grpc-types/src/protos"
-      }
+      "**/*.proto"
     ],
-    "watchAssets": true
+    "watchAssets": true,
+    "webpack": true
   },
   "projects": {
     "api-gateway": {
@@ -95,6 +91,15 @@
       "sourceRoot": "libs/interceptors/src",
       "compilerOptions": {
         "tsConfigPath": "libs/interceptors/tsconfig.lib.json"
+      }
+    },
+    "middlewares": {
+      "type": "library",
+      "root": "libs/middlewares",
+      "entryFile": "index",
+      "sourceRoot": "libs/middlewares/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/middlewares/tsconfig.lib.json"
       }
     }
   }

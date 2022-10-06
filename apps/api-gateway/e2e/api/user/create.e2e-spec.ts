@@ -3,7 +3,6 @@ import { ErrorCodes } from "exceptions/exceptions";
 import { MetaInterface } from "interceptors/interceptors";
 import { createUser } from "../../common/user.helpers";
 
-
 it("should create user", async () => {
   const reqDto: UserProto.UserCreateDto = {
     fullName: "test name",
@@ -14,7 +13,6 @@ it("should create user", async () => {
 
   const { status, data } = await createUser(reqDto);
   expect(status).toBe(201);
-
   const result = <UserProto.UserCreateAck>data.result;
   expect(result.fullName).toBe(reqDto.fullName);
   expect(result.nickname).toBe(reqDto.nickname);

@@ -12,8 +12,12 @@ import { AuthProto } from "grpc-types/grpc-types";
         transport: Transport.GRPC,
         options: {
           package: AuthProto.AUTH_PACKAGE_NAME,
-          protoPath: join(__dirname, "./auth.proto"),
-          url: "localhost:50051"
+          protoPath: join(__dirname, "./../../../../../libs/grpc-types/src/protos/auth.proto"),
+          url: "localhost:50051",
+          loader: {
+            keepCase: true,
+            enums: String
+          }
         }
       }
     ])

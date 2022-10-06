@@ -17,7 +17,6 @@ export class AuthController implements OnModuleInit {
 
   @Post("login")
   async login(@Body() dto: AuthProto.LoginDto): Promise<Observable<AuthProto.LoginAck>> {
-    console.log("istek geldi?");
     return this.authService.login(dto);
   }
 

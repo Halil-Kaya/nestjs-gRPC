@@ -9,6 +9,23 @@ export enum UserRole {
   NORMAL = "NORMAL",
 }
 
+export interface User {
+  _id: string;
+  fullName: string;
+  nickname: string;
+  password?: string | undefined;
+  role: UserRole;
+  createdAt: Date | undefined;
+}
+
+export interface FindByIdDto {
+  _id: string;
+}
+
+export interface FindByNicknameDto {
+  nickname: string;
+}
+
 export interface UserCreateDto {
   fullName: string;
   nickname: string;
@@ -28,15 +45,23 @@ export const USER_PACKAGE_NAME = "user";
 
 export interface UserServiceClient {
   create(request: UserCreateDto): Observable<UserCreateAck>;
+
+  findByNickname(request: FindByNicknameDto): Observable<User>;
+
+  findById(request: FindByIdDto): Observable<User>;
 }
 
 export interface UserServiceController {
   create(request: UserCreateDto): Promise<UserCreateAck> | Observable<UserCreateAck> | UserCreateAck;
+
+  findByNickname(request: FindByNicknameDto): Promise<User> | Observable<User> | User;
+
+  findById(request: FindByIdDto): Promise<User> | Observable<User> | User;
 }
 
 export function UserServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["create"];
+    const grpcMethods: string[] = ["create", "findByNickname", "findById"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);

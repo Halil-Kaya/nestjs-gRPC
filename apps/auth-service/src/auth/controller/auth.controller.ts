@@ -10,7 +10,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {
   }
 
-  login(dto: AuthProto.LoginDto): AuthProto.LoginAck {
+  async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
     return this.authService.login(dto);
   }
+
 }

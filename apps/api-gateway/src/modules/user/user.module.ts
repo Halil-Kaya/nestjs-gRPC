@@ -12,8 +12,12 @@ import { UserProto } from "grpc-types/grpc-types";
         transport: Transport.GRPC,
         options: {
           package: UserProto.USER_PACKAGE_NAME,
-          protoPath: join(__dirname, "./user.proto"),
-          url: "localhost:50050"
+          protoPath: join(__dirname, "./../../../../../libs/grpc-types/src/protos/user.proto"),
+          url: "localhost:50050",
+          loader: {
+            keepCase: true,
+            enums: String
+          }
         }
       }
     ])
