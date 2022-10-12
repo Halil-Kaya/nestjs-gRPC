@@ -8,8 +8,7 @@
     "assets": [
       "**/*.proto"
     ],
-    "watchAssets": true,
-    "webpack": true
+    "watchAssets": true
   },
   "projects": {
     "api-gateway": {

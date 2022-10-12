@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package todo;
+
+service TodoService{
+  rpc ExRequiredFields(ExRequiredFieldDto) returns(ExRequiredFieldDto) {}
+}
+
+message ExRequiredFieldDto{
+  string field1 = 1;
+  string field2 = 2;
+}

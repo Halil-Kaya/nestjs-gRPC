@@ -15,7 +15,8 @@ async function bootstrap() {
       url: "localhost:50050",
       loader: {
         keepCase: true,
-        enums: String
+        enums: String,
+        longs: Number
       }
     }
   });

@@ -1,6 +1,8 @@
 import { AuthProto, UserProto } from "grpc-types/grpc-types";
 import { createUser } from "../../common/user.helpers";
 import { login } from "../../common/auth.helpers";
+import { MetaInterface } from "interceptors/interceptors";
+import { ErrorCodes } from "exceptions/exceptions";
 
 it("Should user get token", async () => {
 
@@ -28,3 +30,19 @@ it("Should user get token", async () => {
   expect(res1._id).toBe(payload._id);
 });
 
+it("should invalid user get error", async () => {
+
+  const reqDto: AuthProto.LoginDto = {
+    nickname: "testest",
+    password: "testesttest"
+  };
+
+  try {
+    await login(reqDto);
+    expect(undefined).toBeDefined();
+  } catch (err) {
+    const result = <MetaInterface>err.response.data.meta;
+    expect(result.errorCode).toBe(ErrorCodes.INVALID_CREDENTIALS);
+  }
+
+}); 

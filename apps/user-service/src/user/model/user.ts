@@ -33,7 +33,7 @@ export class User {
   role: UserRole;
 
   @Prop({ type: Date, required: false })
-  createdAt: Date;
+  createdAt: any;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

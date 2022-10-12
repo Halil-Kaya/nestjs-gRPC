@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
+import { Inject, Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { AuthProto, UserProto } from "grpc-types/grpc-types";
 import { ClientGrpc } from "@nestjs/microservices";
 import { InvalidCredentialsException } from "exceptions/exceptions";
@@ -17,7 +17,9 @@ export class AuthService implements OnModuleInit {
   }
 
   async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
+    console.log("user service ine istek atmadan once");
     const user = await this.userService.findByNickname({ nickname: dto.nickname }).toPromise();
+    console.log("user service ine istek attiktan sonra");
     if (!user) {
       throw new InvalidCredentialsException();
     }

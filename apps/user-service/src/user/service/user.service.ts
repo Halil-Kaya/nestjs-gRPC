@@ -18,11 +18,11 @@ export class UserService {
     return this.userRepository.create(dto, session);
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string): Promise<UserProto.User> {
     return this.userRepository.findById(id);
   }
 
-  async findByNickname(nickname: string): Promise<User> {
+  async findByNickname(nickname: string): Promise<UserProto.User> {
     return this.userRepository.findByNickname(nickname);
   }
 
