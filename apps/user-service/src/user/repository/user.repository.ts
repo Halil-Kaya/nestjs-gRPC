@@ -3,7 +3,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument, UserRole } from "../model/user";
 import { ClientSession, Model } from "mongoose";
 import { UserProto } from "grpc-types/grpc-types";
-import { enumAdapterHelper } from "core/core";
 
 @Injectable()
 export class UserRepository {
@@ -12,10 +11,7 @@ export class UserRepository {
   }
 
   async create(dto: UserProto.UserCreateDto, session?: ClientSession): Promise<User> {
-    const user = new this.userModel({
-      ...dto,
-      role: enumAdapterHelper(dto.role, UserProto.UserRole, UserRole)
-    });
+    const user = new this.userModel(dto);
     return user.save({ session });
   }
 

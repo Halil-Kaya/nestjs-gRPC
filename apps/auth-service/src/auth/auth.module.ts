@@ -18,7 +18,7 @@ import { JwtModule } from "@nestjs/jwt";
         transport: Transport.GRPC,
         options: {
           package: UserProto.USER_PACKAGE_NAME,
-          protoPath: join(__dirname, "./../../../../libs/grpc-types/src/protos/user.proto"),
+          protoPath: join(__dirname, "./../user.proto"),
           url: "localhost:50050"
         }
       }

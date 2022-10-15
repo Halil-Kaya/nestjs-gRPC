@@ -8,7 +8,8 @@
     "assets": [
       "**/*.proto"
     ],
-    "watchAssets": true
+    "watchAssets": true,
+    "webpack": true
   },
   "projects": {
     "api-gateway": {
@@ -17,7 +18,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/api-gateway/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+        "tsConfigPath": "apps/api-gateway/tsconfig.app.json",
+        "webpack": true
       }
     },
     "user-service": {
@@ -26,7 +28,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/user-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/user-service/tsconfig.app.json"
+        "tsConfigPath": "apps/user-service/tsconfig.app.json",
+        "webpack": true
       }
     },
     "todo-service": {
@@ -35,7 +38,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/todo-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/todo-service/tsconfig.app.json"
+        "tsConfigPath": "apps/todo-service/tsconfig.app.json",
+        "webpack": true
       }
     },
     "auth-service": {
@@ -44,7 +48,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/auth-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/auth-service/tsconfig.app.json"
+        "tsConfigPath": "apps/auth-service/tsconfig.app.json",
+        "webpack": true
       }
     },
     "exceptions": {

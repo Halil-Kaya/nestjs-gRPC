@@ -10,7 +10,7 @@ it("Should user get token", async () => {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
     role: UserProto.UserRole.NORMAL,
-    password: "123456"
+    password: Math.random().toString(36).slice(2, 16)
   };
 
   const { data: data1, status: status1 } = await createUser(reqDto);
@@ -30,8 +30,31 @@ it("Should user get token", async () => {
   expect(res1._id).toBe(payload._id);
 });
 
-it("should invalid user get error", async () => {
+it("should get invalid credentials error if password not match ", async () => {
+  const reqDto: UserProto.UserCreateDto = {
+    fullName: "test name",
+    nickname: Math.random().toString(36).slice(2, 16),
+    role: UserProto.UserRole.NORMAL,
+    password: "123456"
+  };
 
+  await createUser(reqDto);
+
+  const loginDto: AuthProto.LoginDto = {
+    nickname: reqDto.nickname,
+    password: "wrong-password"
+  };
+
+  try {
+    await login(loginDto);
+    expect(undefined).toBeDefined();
+  } catch (err) {
+    const result = <MetaInterface>err.response.data.meta;
+    expect(result.errorCode).toBe(ErrorCodes.INVALID_CREDENTIALS);
+  }
+});
+
+it("should get invalid credentials error if user not exist", async () => {
   const reqDto: AuthProto.LoginDto = {
     nickname: "testest",
     password: "testesttest"
@@ -44,5 +67,4 @@ it("should invalid user get error", async () => {
     const result = <MetaInterface>err.response.data.meta;
     expect(result.errorCode).toBe(ErrorCodes.INVALID_CREDENTIALS);
   }
-
-}); 
+});

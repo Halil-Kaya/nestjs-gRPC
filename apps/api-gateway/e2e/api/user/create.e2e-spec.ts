@@ -18,8 +18,6 @@ it("should create user", async () => {
   expect(result.nickname).toBe(reqDto.nickname);
   expect(result._id).toBeDefined();
   expect(result.createdAt).toBeDefined();
-
-  console.log(result);
 });
 
 it("should throw error if nickname is taken", async () => {

@@ -3,6 +3,8 @@ import { AuthProto, UserProto } from "grpc-types/grpc-types";
 import { ClientGrpc } from "@nestjs/microservices";
 import { InvalidCredentialsException } from "exceptions/exceptions";
 import { JwtService } from "@nestjs/jwt";
+import { firstValueFrom } from "rxjs";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -17,10 +19,13 @@ export class AuthService implements OnModuleInit {
   }
 
   async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
-    console.log("user service ine istek atmadan once");
-    const user = await this.userService.findByNickname({ nickname: dto.nickname }).toPromise();
-    console.log("user service ine istek attiktan sonra");
-    if (!user) {
+    const { nickname, password } = dto;
+    const user = await firstValueFrom(this.userService.findByNickname({ nickname }));
+    if (!user || Object.keys(user).length === 0) {
+      throw new InvalidCredentialsException();
+    }
+    const isPasswordMatch: boolean = await AuthService.checkPasswordMatch(password, user.password);
+    if (!isPasswordMatch) {
       throw new InvalidCredentialsException();
     }
     return {
@@ -28,6 +33,10 @@ export class AuthService implements OnModuleInit {
         _id: user._id
       })
     };
+  }
+
+  private static checkPasswordMatch(password, realPassword): Promise<boolean> {
+    return bcrypt.compare(password, realPassword);
   }
 
 }

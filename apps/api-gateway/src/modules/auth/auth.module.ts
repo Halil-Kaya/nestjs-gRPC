@@ -1,4 +1,3 @@
-
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 import { join } from "path";
@@ -13,7 +12,7 @@ import { AuthProto } from "grpc-types/grpc-types";
         transport: Transport.GRPC,
         options: {
           package: AuthProto.AUTH_PACKAGE_NAME,
-          protoPath: join(__dirname, "./../../../../../libs/grpc-types/src/protos/auth.proto"),
+          protoPath: join(__dirname, "./../auth.proto"),
           url: "localhost:50051",
           loader: {
             keepCase: true,

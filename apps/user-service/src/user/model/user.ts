@@ -5,8 +5,8 @@ import { hashSync } from "bcryptjs";
 export type UserDocument = User & Document;
 
 export enum UserRole {
-  ADMIN = "admin",
-  NORMAL = "normal"
+  ADMIN = "ADMIN",
+  NORMAL = "NORMAL"
 }
 
 @Schema({
@@ -32,8 +32,8 @@ export class User {
   @Prop({ type: String, enum: UserRole, default: UserRole.NORMAL })
   role: UserRole;
 
-  @Prop({ type: Date, required: false })
-  createdAt: any;
+  @Prop({ type: Number, default: Date.now, required: false })
+  createdAt: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

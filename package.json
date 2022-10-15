@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "proto:generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=nestJs=true --ts_proto_opt=useDate=true,returnObservable=false,useObjectId=true,unrecognizedEnum=false,stringEnums=true,snakeToCamel=false --ts_proto_out=. ./libs/grpc-types/src/protos/*.proto --ts_proto_opt=esModuleInterop=true",
+    "proto:generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=nestJs=true --ts_proto_opt=useDate=true,returnObservable=false,oneof=unions,useObjectId=true,unrecognizedEnum=false,stringEnums=true,snakeToCamel=false --ts_proto_out=. ./libs/grpc-types/src/protos/*.proto --ts_proto_opt=esModuleInterop=true",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -31,6 +31,7 @@
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
     "axios": "^0.27.2",
+    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "mongoose": "^6.6.3",
     "reflect-metadata": "^0.1.13",

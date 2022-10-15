@@ -8,72 +8,11 @@ service UserService{
   rpc Create(UserCreateDto) returns (UserCreateAck){};
   rpc FindByNickname(FindByNicknameDto) returns (User) {};
   rpc FindById(FindByIdDto) returns (User) {};
-  rpc ExampleFields(ExampleFieldsDto) returns (ExampleFieldsAck) {};
-  rpc ExNested(ExNestedDto) returns(ExNestedAck){}
-  rpc ExOneOf(ExOneOfDto) returns(Empty){}
-  rpc ExErrorHandling(Empty) returns(Empty){}
-}
-
-
-message Empty{
-
-}
-
-message ExOneOfDto{
-  oneof test{
-    Dto_one one = 1;
-    Dto_two two = 2;
-  }
-}
-
-message ExOneOfAck{
-  oneof test{
-    Dto_one one = 1;
-    Dto_two two = 2;
-  }
-}
-
-
-message Dto_one{
-  string title = 1;
-}
-
-message Dto_two{
-  string content = 2;
-}
-
-message ExNestedDto{
-
-}
-
-message ExNestedAck{
-  NestedDeep nested = 1;
-  repeated Todo todos = 2;
-}
-
-message NestedDeep{
-  User user = 1;
-  string foo = 2;
-}
-
-message Todo{
-  string title = 1;
-  string content = 2;
 }
 
 enum UserRole{
   ADMIN = 0;
   NORMAL = 1;
-}
-
-message ExampleFieldsDto{
-  string fieldOne = 1;
-  string fieldTwo = 2;
-}
-
-message ExampleFieldsAck{
-  string fieldOne = 1;
-  string fieldTwo = 2;
 }
 
 message User{
