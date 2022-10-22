@@ -5,8 +5,7 @@ export type TodoDocument = Todo & Document;
 
 @Schema({
   versionKey: false,
-  id: true,
-  timestamps: true
+  id: true
 })
 export class Todo {
   @Prop({ type: MongooseSchema.Types.ObjectId, default: Types.ObjectId })
@@ -23,6 +22,15 @@ export class Todo {
     type: String
   })
   content: string;
+
+  @Prop({
+    type: String,
+    required: true
+  })
+  userId: string;
+
+  @Prop({ type: Number, default: Date.now, required: false })
+  createdAt: number;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
