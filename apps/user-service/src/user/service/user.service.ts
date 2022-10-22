@@ -23,17 +23,11 @@ export class UserService {
     };
   }
 
-  async findById(id: string): Promise<UserProto.FindByIdAck> {
-    const user = await this.userRepository.findById(id);
+  async getUserForLogin(dto: UserProto.GetUserForLoginDto): Promise<UserProto.GetUserForLoginAck> {
+    const user = await this.userRepository.getUserByNickname(dto.nickname, ["+password"]);
     return {
       user
     };
   }
 
-  async findByNickname(nickname: string): Promise<UserProto.FindByNicknameAck> {
-    const user = await this.userRepository.findByNickname(nickname);
-    return {
-      user
-    };
-  }
 }

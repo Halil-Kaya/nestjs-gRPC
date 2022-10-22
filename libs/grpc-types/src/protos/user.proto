@@ -4,34 +4,20 @@ package user;
 
 service UserService{
   rpc Create(UserCreateDto) returns (UserCreateAck){};
-  rpc FindByNickname(FindByNicknameDto) returns (FindByNicknameAck) {};
-  rpc FindById(FindByIdDto) returns (FindByIdAck) {};
+  rpc GetUserForLogin(GetUserForLoginDto) returns(GetUserForLoginAck){};
 }
 
-message FindByNicknameAck{
-  User user = 1;
-}
-
-message FindByIdAck{
-  User user = 1;
-}
-
-message User{
-  string _id = 1;
-  string fullName = 2;
-  string nickname = 3;
-  optional string password = 4;
-  int64 createdAt = 6;
-}
-
-message FindByIdDto{
-  string _id = 1;
-}
-
-message FindByNicknameDto{
+// <-- GetUserForLogin
+message GetUserForLoginDto{
   string nickname = 1;
 }
 
+message GetUserForLoginAck{
+  User user = 1;
+}
+// GetUserForLogin -->
+
+// <-- create
 message UserCreateDto{
   string fullName = 1;
   string nickname = 2;
@@ -44,3 +30,16 @@ message UserCreateAck{
   string nickname = 3;
   int64 createdAt = 5;
 }
+
+// create -->
+
+// <-- common section
+message User{
+  string _id = 1;
+  string fullName = 2;
+  string nickname = 3;
+  optional string password = 4;
+  int64 createdAt = 6;
+}
+
+// common section -->

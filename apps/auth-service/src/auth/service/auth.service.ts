@@ -20,7 +20,7 @@ export class AuthService implements OnModuleInit {
 
   async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
     const { nickname, password } = dto;
-    const { user } = await firstValueFrom(this.userService.findByNickname({ nickname }));
+    const { user } = await firstValueFrom(this.userService.getUserForLogin({ nickname }));
     if (!user || Object.keys(user).length === 0) {
       throw new InvalidCredentialsException();
     }

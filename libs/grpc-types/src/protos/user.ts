@@ -4,30 +4,16 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "user";
 
-export interface FindByNicknameAck {
-  user: User | undefined;
-}
-
-export interface FindByIdAck {
-  user: User | undefined;
-}
-
-export interface User {
-  _id: string;
-  fullName: string;
-  nickname: string;
-  password?: string | undefined;
-  createdAt: number;
-}
-
-export interface FindByIdDto {
-  _id: string;
-}
-
-export interface FindByNicknameDto {
+/** <-- GetUserForLogin */
+export interface GetUserForLoginDto {
   nickname: string;
 }
 
+export interface GetUserForLoginAck {
+  user: User | undefined;
+}
+
+/** <-- create */
 export interface UserCreateDto {
   fullName: string;
   nickname: string;
@@ -41,29 +27,34 @@ export interface UserCreateAck {
   createdAt: number;
 }
 
+/** <-- common section */
+export interface User {
+  _id: string;
+  fullName: string;
+  nickname: string;
+  password?: string | undefined;
+  createdAt: number;
+}
+
 export const USER_PACKAGE_NAME = "user";
 
 export interface UserServiceClient {
   create(request: UserCreateDto): Observable<UserCreateAck>;
 
-  findByNickname(request: FindByNicknameDto): Observable<FindByNicknameAck>;
-
-  findById(request: FindByIdDto): Observable<FindByIdAck>;
+  getUserForLogin(request: GetUserForLoginDto): Observable<GetUserForLoginAck>;
 }
 
 export interface UserServiceController {
   create(request: UserCreateDto): Promise<UserCreateAck> | Observable<UserCreateAck> | UserCreateAck;
 
-  findByNickname(
-    request: FindByNicknameDto
-  ): Promise<FindByNicknameAck> | Observable<FindByNicknameAck> | FindByNicknameAck;
-
-  findById(request: FindByIdDto): Promise<FindByIdAck> | Observable<FindByIdAck> | FindByIdAck;
+  getUserForLogin(
+    request: GetUserForLoginDto,
+  ): Promise<GetUserForLoginAck> | Observable<GetUserForLoginAck> | GetUserForLoginAck;
 }
 
 export function UserServiceControllerMethods() {
-  return function(constructor: Function) {
-    const grpcMethods: string[] = ["create", "findByNickname", "findById"];
+  return function (constructor: Function) {
+    const grpcMethods: string[] = ["create", "getUserForLogin"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);

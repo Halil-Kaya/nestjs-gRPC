@@ -16,11 +16,8 @@ export class UserController implements UserProto.UserServiceController {
     return this.userService.create(data);
   }
 
-  async findByNickname(data: UserProto.FindByNicknameDto): Promise<UserProto.FindByNicknameAck> {
-    return this.userService.findByNickname(data.nickname);
+  getUserForLogin(request: UserProto.GetUserForLoginDto): Promise<UserProto.GetUserForLoginAck> {
+    return this.userService.getUserForLogin(request);
   }
 
-  async findById(data: UserProto.FindByIdDto): Promise<UserProto.FindByIdAck> {
-    return this.userService.findById(data._id);
-  }
 }

@@ -15,12 +15,8 @@ export class UserRepository {
     return user.save({ session });
   }
 
-  async findById(id: string): Promise<User> {
-    return this.userModel.findById(id).select("+password").lean().exec();
-  }
-
-  async findByNickname(nickname: string): Promise<User> {
-    return this.userModel.findOne({ nickname }).select("+password").lean().exec();
+  async getUserByNickname(nickname: string, select: string[] = []) {
+    return this.userModel.findOne({ nickname }).select(select);
   }
 
   async isNicknameTaken(nickname: string): Promise<boolean> {
