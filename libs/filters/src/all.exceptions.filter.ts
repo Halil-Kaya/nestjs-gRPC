@@ -5,6 +5,7 @@ import {
   Logger
 } from "@nestjs/common";
 import { GeneralServerErrorException } from "exceptions/exceptions";
+import { GrpcMetadataErrorKey } from "grpc-types/grpc-types";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -16,7 +17,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const request = ctx.getRequest();
     if (exception.metadata) {
       try {
-        exception = JSON.parse(exception.metadata.get("customError")[0]);
+        exception = JSON.parse(exception.metadata.get(GrpcMetadataErrorKey)[0]);
       } catch (e) {
         exception = new GeneralServerErrorException();
       }

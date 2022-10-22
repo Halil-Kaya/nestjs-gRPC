@@ -14,7 +14,13 @@ export class UserService {
     if (isNicknameTaken) {
       throw new NicknameAlreadyTakenException();
     }
-    return this.userRepository.create(dto, session);
+    const createdUser = await this.userRepository.create(dto, session);
+    return {
+      _id: createdUser.id,
+      nickname: createdUser.nickname,
+      fullName: createdUser.fullName,
+      createdAt: createdUser.createdAt
+    };
   }
 
   async findById(id: string): Promise<UserProto.FindByIdAck> {
@@ -30,5 +36,4 @@ export class UserService {
       user
     };
   }
-
 }

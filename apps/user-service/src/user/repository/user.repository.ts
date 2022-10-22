@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument, UserRole } from "../model/user";
+import { User, UserDocument } from "../model/user";
 import { ClientSession, Model } from "mongoose";
 import { UserProto } from "grpc-types/grpc-types";
 
@@ -16,11 +16,11 @@ export class UserRepository {
   }
 
   async findById(id: string): Promise<User> {
-    return this.userModel.findById(id).lean().exec();
+    return this.userModel.findById(id).select("+password").lean().exec();
   }
 
   async findByNickname(nickname: string): Promise<User> {
-    return this.userModel.findOne({ nickname }).lean().exec();
+    return this.userModel.findOne({ nickname }).select("+password").lean().exec();
   }
 
   async isNicknameTaken(nickname: string): Promise<boolean> {

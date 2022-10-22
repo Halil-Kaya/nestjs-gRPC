@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Inject, OnModuleInit, Post } from "@nestjs/common";
+import { Body, Controller, Inject, OnModuleInit, Post } from "@nestjs/common";
 import { UserProto } from "grpc-types/grpc-types";
 import { ClientGrpc } from "@nestjs/microservices";
-import { firstValueFrom, Observable } from "rxjs";
+import { firstValueFrom } from "rxjs";
 
 @Controller("user")
 export class UserController implements OnModuleInit {
@@ -15,15 +15,7 @@ export class UserController implements OnModuleInit {
   }
 
   @Post()
-  async create(@Body() dto: UserProto.UserCreateDto): Promise<Observable<UserProto.UserCreateAck>> {
-    let createdUser;
-    try {
-      createdUser = await firstValueFrom(this.userService.create(dto));
-      console.log({ createdUser });
-    } catch (err) {
-      console.log(err);
-    }
-
-    return createdUser;
+  async create(@Body() dto: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
+    return firstValueFrom(this.userService.create(dto));
   }
 }

@@ -1,9 +1,8 @@
 import { Module } from "@nestjs/common";
 import { AuthController } from "./controller/auth.controller";
 import { AuthService } from "./service/auth.service";
-import { ClientsModule, Transport } from "@nestjs/microservices";
-import { UserProto } from "grpc-types/grpc-types";
-import { join } from "path";
+import { ClientsModule } from "@nestjs/microservices";
+import { GrpcClients } from "grpc-types/grpc-types";
 import { JwtModule } from "@nestjs/jwt";
 
 @Module({
@@ -13,15 +12,7 @@ import { JwtModule } from "@nestjs/jwt";
       signOptions: { expiresIn: "1d" }
     }),
     ClientsModule.register([
-      {
-        name: UserProto.USER_PACKAGE_NAME,
-        transport: Transport.GRPC,
-        options: {
-          package: UserProto.USER_PACKAGE_NAME,
-          protoPath: join(__dirname, "./../user.proto"),
-          url: "localhost:50050"
-        }
-      }
+      GrpcClients.UserClient
     ])
   ],
   controllers: [AuthController],

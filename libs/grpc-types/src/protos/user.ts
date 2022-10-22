@@ -4,11 +4,6 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "user";
 
-export enum UserRole {
-  ADMIN = "ADMIN",
-  NORMAL = "NORMAL",
-}
-
 export interface FindByNicknameAck {
   user: User | undefined;
 }
@@ -22,7 +17,6 @@ export interface User {
   fullName: string;
   nickname: string;
   password?: string | undefined;
-  role: UserRole;
   createdAt: number;
 }
 
@@ -38,14 +32,12 @@ export interface UserCreateDto {
   fullName: string;
   nickname: string;
   password: string;
-  role: UserRole;
 }
 
 export interface UserCreateAck {
   _id: string;
   fullName: string;
   nickname: string;
-  role: UserRole;
   createdAt: number;
 }
 
@@ -63,14 +55,14 @@ export interface UserServiceController {
   create(request: UserCreateDto): Promise<UserCreateAck> | Observable<UserCreateAck> | UserCreateAck;
 
   findByNickname(
-    request: FindByNicknameDto,
+    request: FindByNicknameDto
   ): Promise<FindByNicknameAck> | Observable<FindByNicknameAck> | FindByNicknameAck;
 
   findById(request: FindByIdDto): Promise<FindByIdAck> | Observable<FindByIdAck> | FindByIdAck;
 }
 
 export function UserServiceControllerMethods() {
-  return function (constructor: Function) {
+  return function(constructor: Function) {
     const grpcMethods: string[] = ["create", "findByNickname", "findById"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

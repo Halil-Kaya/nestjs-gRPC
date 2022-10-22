@@ -1,10 +1,12 @@
-import { Controller, UseFilters } from "@nestjs/common";
+import { Controller, UseFilters, UseInterceptors } from "@nestjs/common";
 import { GrpcAllExceptionsFilter } from "filters/filters";
 import { AuthProto } from "grpc-types/grpc-types";
 import { AuthService } from "../service/auth.service";
+import { GrpcLogInterceptor } from "interceptors/interceptors";
 
 @UseFilters(GrpcAllExceptionsFilter)
-@Controller()
+@UseInterceptors(GrpcLogInterceptor)
+@Controller("auth")
 @AuthProto.AuthServiceControllerMethods()
 export class AuthController {
   constructor(private readonly authService: AuthService) {

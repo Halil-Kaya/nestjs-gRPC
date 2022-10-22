@@ -1,7 +1,7 @@
 export const AuthConfig = {
-  hostname: "auth",
+  hostname: "localhost", // it will be auth-service in docker
   port: 5055,
-  path: "./",
+  path: "./../../auth.proto",
   loader: {
     keepCase: true,
     longs: Number,
@@ -11,9 +11,9 @@ export const AuthConfig = {
 };
 
 export const UserConfig = {
-  hostname: "user",
-  port: 5055,
-  path: "./",
+  hostname: "localhost",// it will be user-service in docker
+  port: 5056,
+  path: "./../../user.proto",
   loader: {
     keepCase: true,
     longs: Number,

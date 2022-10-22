@@ -4,11 +4,6 @@ import { hashSync } from "bcryptjs";
 
 export type UserDocument = User & Document;
 
-export enum UserRole {
-  ADMIN = "ADMIN",
-  NORMAL = "NORMAL"
-}
-
 @Schema({
   versionKey: false,
   id: true,
@@ -28,9 +23,6 @@ export class User {
 
   @Prop({ type: String, select: false, required: true })
   password: string;
-
-  @Prop({ type: String, enum: UserRole, default: UserRole.NORMAL })
-  role: UserRole;
 
   @Prop({ type: Number, default: Date.now, required: false })
   createdAt: number;

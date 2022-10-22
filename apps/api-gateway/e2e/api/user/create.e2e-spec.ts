@@ -7,7 +7,6 @@ it("should create user", async () => {
   const reqDto: UserProto.UserCreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
-    role: UserProto.UserRole.NORMAL,
     password: "123456"
   };
 
@@ -24,7 +23,6 @@ it("should throw error if nickname is taken", async () => {
   const reqDto: UserProto.UserCreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
-    role: UserProto.UserRole.NORMAL,
     password: "123456"
   };
 

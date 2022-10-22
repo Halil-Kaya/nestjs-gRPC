@@ -9,7 +9,6 @@ it("Should user get token", async () => {
   const reqDto: UserProto.UserCreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
-    role: UserProto.UserRole.NORMAL,
     password: Math.random().toString(36).slice(2, 16)
   };
 
@@ -34,7 +33,6 @@ it("should get invalid credentials error if password not match ", async () => {
   const reqDto: UserProto.UserCreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
-    role: UserProto.UserRole.NORMAL,
     password: "123456"
   };
 
