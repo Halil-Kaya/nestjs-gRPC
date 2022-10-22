@@ -17,11 +17,11 @@ export class UserController implements UserProto.UserServiceController {
     return this.userService.create(data);
   }
 
-  async findByNickname(data: UserProto.FindByNicknameDto): Promise<UserProto.User> {
+  async findByNickname(data: UserProto.FindByNicknameDto): Promise<UserProto.FindByNicknameAck> {
     return this.userService.findByNickname(data.nickname);
   }
 
-  async findById(data: UserProto.FindByIdDto): Promise<UserProto.User> {
+  async findById(data: UserProto.FindByIdDto): Promise<UserProto.FindByIdAck> {
     return this.userService.findById(data._id);
   }
 }

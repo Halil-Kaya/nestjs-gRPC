@@ -1,18 +1,24 @@
 syntax = "proto3";
 
 package user;
-import "google/protobuf/empty.proto";
-import "google/protobuf/any.proto";
 
 service UserService{
   rpc Create(UserCreateDto) returns (UserCreateAck){};
-  rpc FindByNickname(FindByNicknameDto) returns (User) {};
-  rpc FindById(FindByIdDto) returns (User) {};
+  rpc FindByNickname(FindByNicknameDto) returns (FindByNicknameAck) {};
+  rpc FindById(FindByIdDto) returns (FindByIdAck) {};
 }
 
 enum UserRole{
   ADMIN = 0;
   NORMAL = 1;
+}
+
+message FindByNicknameAck{
+  User user = 1;
+}
+
+message FindByIdAck{
+  User user = 1;
 }
 
 message User{

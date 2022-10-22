@@ -9,6 +9,14 @@ export enum UserRole {
   NORMAL = "NORMAL",
 }
 
+export interface FindByNicknameAck {
+  user: User | undefined;
+}
+
+export interface FindByIdAck {
+  user: User | undefined;
+}
+
 export interface User {
   _id: string;
   fullName: string;
@@ -46,17 +54,19 @@ export const USER_PACKAGE_NAME = "user";
 export interface UserServiceClient {
   create(request: UserCreateDto): Observable<UserCreateAck>;
 
-  findByNickname(request: FindByNicknameDto): Observable<User>;
+  findByNickname(request: FindByNicknameDto): Observable<FindByNicknameAck>;
 
-  findById(request: FindByIdDto): Observable<User>;
+  findById(request: FindByIdDto): Observable<FindByIdAck>;
 }
 
 export interface UserServiceController {
   create(request: UserCreateDto): Promise<UserCreateAck> | Observable<UserCreateAck> | UserCreateAck;
 
-  findByNickname(request: FindByNicknameDto): Promise<User> | Observable<User> | User;
+  findByNickname(
+    request: FindByNicknameDto,
+  ): Promise<FindByNicknameAck> | Observable<FindByNicknameAck> | FindByNicknameAck;
 
-  findById(request: FindByIdDto): Promise<User> | Observable<User> | User;
+  findById(request: FindByIdDto): Promise<FindByIdAck> | Observable<FindByIdAck> | FindByIdAck;
 }
 
 export function UserServiceControllerMethods() {
