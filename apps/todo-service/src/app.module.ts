@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common";
 import { TodoModule } from "./todo/todo.module";
+import { MongooseModule } from "@nestjs/mongoose";
 
 @Module({
   imports: [
-    TodoModule
+    TodoModule,
+    MongooseModule.forRoot("mongodb://localhost:27016")
   ],
   controllers: [],
   providers: []
