@@ -1,7 +1,7 @@
 import { join } from "path";
-import { AuthProto, UserProto } from "grpc-types/grpc-types/index";
+import { AuthProto, TodoProto, UserProto } from "grpc-types/grpc-types/index";
 import { Transport } from "@nestjs/microservices";
-import { AuthConfig, UserConfig } from "grpc-types/grpc-types/config";
+import { AuthConfig, TodoConfig, UserConfig } from "grpc-types/grpc-types/config";
 
 export const AuthClient: any = {
   name: AuthProto.AUTH_PACKAGE_NAME,
@@ -22,5 +22,16 @@ export const UserClient: any = {
     protoPath: join(__dirname, UserConfig.path),
     url: `${UserConfig.hostname}:${UserConfig.port}`,
     loader: UserConfig.loader
+  }
+};
+
+export const TodoClient: any = {
+  name: TodoProto.TODO_PACKAGE_NAME,
+  transport: Transport.GRPC,
+  options: {
+    package: TodoProto.TODO_PACKAGE_NAME,
+    protoPath: join(__dirname, TodoConfig.path),
+    url: `${TodoConfig.hostname}:${TodoConfig.port}`,
+    loader: TodoConfig.loader
   }
 };

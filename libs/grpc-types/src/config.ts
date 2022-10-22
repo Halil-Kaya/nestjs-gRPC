@@ -21,3 +21,15 @@ export const UserConfig = {
     arrays: true
   }
 };
+
+export const TodoConfig = {
+  hostname: "localhost",// it will be todo-service in docker
+  port: 5057,
+  path: "./../../todo.proto",
+  loader: {
+    keepCase: true,
+    longs: Number,
+    enums: String,
+    arrays: true
+  }
+};
