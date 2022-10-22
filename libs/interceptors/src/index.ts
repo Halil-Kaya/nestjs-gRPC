@@ -1,2 +1,2 @@
 export * from "./transform.interceptor";
-export * from "./grpc-empty-result.interceptor";
+export * from "./grpc-log.interceptor";
