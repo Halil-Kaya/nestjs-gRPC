@@ -14,4 +14,11 @@ export class TodoService {
     };
   }
 
+  async fetch(dto: TodoProto.FetchDto): Promise<TodoProto.FetchAck> {
+    const todos = await this.todoRepository.fetch(dto.user_id);
+    return {
+      todos
+    };
+  }
+
 }

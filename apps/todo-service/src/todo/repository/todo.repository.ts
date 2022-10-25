@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Todo, TodoDocument } from "../model/todo";
-import { Model } from "mongoose";
+import { LeanDocument, Model } from "mongoose";
 import { TodoProto } from "grpc-types/grpc-types";
 
 @Injectable()
@@ -14,4 +14,7 @@ export class TodoRepository {
     return todo.save();
   }
 
+  async fetch(user_id: string): Promise<LeanDocument<TodoDocument[]>> {
+    return this.todoModel.find({ userId: user_id });
+  }
 }
