@@ -9,7 +9,7 @@ import { JwtModule } from "@nestjs/jwt";
   imports: [
     JwtModule.register({
       secret: "<_._._>",
-      signOptions: { expiresIn: "1d" }
+      signOptions: { expiresIn: "10d" }
     }),
     ClientsModule.register([
       GrpcClients.UserClient

@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "../../user-service/src/app.module";
 import { MicroserviceOptions } from "@nestjs/microservices";
 import { GrpcClients } from "grpc-types/grpc-types";
+import { AppModule } from "./app.module";
 
 
 async function bootstrap() {

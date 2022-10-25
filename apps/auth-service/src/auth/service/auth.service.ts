@@ -5,6 +5,7 @@ import { InvalidCredentialsException } from "exceptions/exceptions";
 import { JwtService } from "@nestjs/jwt";
 import { firstValueFrom } from "rxjs";
 import * as bcrypt from "bcrypt";
+import { SanitizedUser } from "interfaces/interfaces";
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -29,9 +30,13 @@ export class AuthService implements OnModuleInit {
       throw new InvalidCredentialsException();
     }
     return {
-      token: this.jwtService.sign({
-        _id: user._id
-      })
+      token: this.jwtService.sign(this.getPayload(user))
+    };
+  }
+
+  private getPayload(user: UserProto.User): SanitizedUser {
+    return <SanitizedUser>{
+      _id: user._id
     };
   }
 

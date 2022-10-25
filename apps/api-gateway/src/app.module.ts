@@ -1,15 +1,12 @@
-import { MiddlewareConsumer, Module } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { UserModule } from "./modules/user/user.module";
 import { AuthModule } from "./modules/auth/auth.module";
-import { LoggerMiddleware } from "middlewares/middlewares";
+import { TodoModule } from "./modules/todo/todo.module";
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [UserModule, AuthModule, TodoModule],
   controllers: [],
   providers: []
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(LoggerMiddleware).forRoutes("*");
-  }
 }

@@ -15,7 +15,7 @@ export class UserController implements OnModuleInit {
   }
 
   @Post()
-  async create(@Body() dto: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
+  async create(@Body() dto: UserProto.CreateDto): Promise<UserProto.CreateAck> {
     return firstValueFrom(this.userService.create(dto));
   }
 }
