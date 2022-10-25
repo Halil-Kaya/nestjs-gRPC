@@ -24,7 +24,7 @@ export const UserConfig = {
 
 export const TodoConfig = {
   hostname: "localhost",// it will be todo-service in docker
-  port: 5057,
+  port: 5058,
   path: "./../../todo.proto",
   loader: {
     keepCase: true,

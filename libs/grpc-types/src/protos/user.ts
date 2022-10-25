@@ -4,6 +4,15 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "user";
 
+/** <-- FindById */
+export interface FindByIdDto {
+  _id: string;
+}
+
+export interface FindByIdAck {
+  user: User | undefined;
+}
+
 /** <-- GetUserForLogin */
 export interface GetUserForLoginDto {
   nickname: string;
@@ -14,13 +23,13 @@ export interface GetUserForLoginAck {
 }
 
 /** <-- create */
-export interface UserCreateDto {
+export interface CreateDto {
   fullName: string;
   nickname: string;
   password: string;
 }
 
-export interface UserCreateAck {
+export interface CreateAck {
   _id: string;
   fullName: string;
   nickname: string;
@@ -39,22 +48,26 @@ export interface User {
 export const USER_PACKAGE_NAME = "user";
 
 export interface UserServiceClient {
-  create(request: UserCreateDto): Observable<UserCreateAck>;
+  create(request: CreateDto): Observable<CreateAck>;
 
   getUserForLogin(request: GetUserForLoginDto): Observable<GetUserForLoginAck>;
+
+  findById(request: FindByIdDto): Observable<FindByIdAck>;
 }
 
 export interface UserServiceController {
-  create(request: UserCreateDto): Promise<UserCreateAck> | Observable<UserCreateAck> | UserCreateAck;
+  create(request: CreateDto): Promise<CreateAck> | Observable<CreateAck> | CreateAck;
 
   getUserForLogin(
     request: GetUserForLoginDto,
   ): Promise<GetUserForLoginAck> | Observable<GetUserForLoginAck> | GetUserForLoginAck;
+
+  findById(request: FindByIdDto): Promise<FindByIdAck> | Observable<FindByIdAck> | FindByIdAck;
 }
 
 export function UserServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["create", "getUserForLogin"];
+    const grpcMethods: string[] = ["create", "getUserForLogin", "findById"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);

@@ -3,8 +3,19 @@ syntax = "proto3";
 package todo;
 
 service TodoService{
-  rpc Create(CreateDto) returns(CreateAck){}
+  rpc Create(CreateDto) returns(CreateAck){};
+  rpc Fetch(FetchDto) returns(FetchAck);
 }
+
+// <-- Fetch
+message FetchDto{
+  string user_id = 1;
+}
+
+message FetchAck{
+  repeated Todo todos = 1;
+}
+// Fetch -->
 
 // <-- Create
 message CreateDto{

@@ -3,9 +3,20 @@ syntax = "proto3";
 package user;
 
 service UserService{
-  rpc Create(UserCreateDto) returns (UserCreateAck){};
+  rpc Create(CreateDto) returns (CreateAck){};
   rpc GetUserForLogin(GetUserForLoginDto) returns(GetUserForLoginAck){};
+  rpc FindById(FindByIdDto) returns(FindByIdAck){};
 }
+
+// <-- FindById
+message FindByIdDto{
+  string _id = 1;
+}
+
+message FindByIdAck{
+  User user = 1;
+}
+// FindById -->
 
 // <-- GetUserForLogin
 message GetUserForLoginDto{
@@ -18,13 +29,13 @@ message GetUserForLoginAck{
 // GetUserForLogin -->
 
 // <-- create
-message UserCreateDto{
+message CreateDto{
   string fullName = 1;
   string nickname = 2;
   string password = 3;
 }
 
-message UserCreateAck{
+message CreateAck{
   string _id = 1;
   string fullName = 2;
   string nickname = 3;
