@@ -19,15 +19,17 @@ export class AllExceptionsFilter implements ExceptionFilter {
       try {
         exception = JSON.parse(exception.metadata.get(GrpcMetadataErrorKey)[0]);
       } catch (e) {
+        this.logger.error(`[GRPC UNHANDLED ERROR]: [${exception?.message}] :-> `, JSON.stringify(exception));
         exception = new GeneralServerErrorException();
       }
-    }
-    if (!exception.isCustomError) {
+    } else if (!exception.isCustomError) {
+      this.logger.error(`[UNHANDLED ERROR]: [${exception?.message}] :-> `, JSON.stringify(exception));
       exception = new GeneralServerErrorException();
+    } else {
+      this.logger.error(
+        `[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`
+      );
     }
-    this.logger.error(
-      `[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`
-    );
     response.status(500).json({
       meta: {
         headers: request.headers,

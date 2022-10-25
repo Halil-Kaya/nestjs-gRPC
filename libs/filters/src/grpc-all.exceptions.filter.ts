@@ -14,7 +14,6 @@ export class GrpcAllExceptionsFilter extends BaseRpcExceptionFilter {
   private logger = new Logger(GrpcAllExceptionsFilter.name);
 
   catch(exception: any, host: ArgumentsHost) {
-    console.log(exception);
     if (!exception.isCustomError) {
       exception = new GeneralServerErrorException();
     }
