@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema, Types } from "mongoose";
 import { hashSync } from "bcryptjs";
+import { IUser } from "interfaces/interfaces/IUser";
 
 export type UserDocument = User & Document;
 
@@ -8,7 +9,7 @@ export type UserDocument = User & Document;
   versionKey: false,
   id: true
 })
-export class User {
+export class User implements IUser {
   @Prop({ type: MongooseSchema.Types.ObjectId, default: Types.ObjectId })
   public _id: string;
 

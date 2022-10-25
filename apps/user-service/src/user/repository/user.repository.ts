@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from "../model/user";
-import {  Model } from "mongoose";
+import { Model } from "mongoose";
 import { UserProto } from "grpc-types/grpc-types";
+import { IUser } from "interfaces/interfaces/IUser";
 
 @Injectable()
 export class UserRepository {
@@ -10,7 +11,7 @@ export class UserRepository {
   constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>) {
   }
 
-  async create(dto: UserProto.UserCreateDto): Promise<User> {
+  async create(dto: UserProto.CreateDto): Promise<User> {
     const user = new this.userModel(dto);
     return user.save();
   }
@@ -24,5 +25,9 @@ export class UserRepository {
       nickname
     });
     return count > 0;
+  }
+
+  async findById(_id: string): Promise<IUser> {
+    return this.userModel.findById(_id);
   }
 }

@@ -12,7 +12,7 @@ export class UserController implements UserProto.UserServiceController {
   constructor(private readonly userService: UserService) {
   }
 
-  async create(data: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
+  async create(data: UserProto.CreateDto): Promise<UserProto.CreateAck> {
     return this.userService.create(data);
   }
 
@@ -20,4 +20,7 @@ export class UserController implements UserProto.UserServiceController {
     return this.userService.getUserForLogin(request);
   }
 
+  findById(request: UserProto.FindByIdDto): Promise<UserProto.FindByIdAck> {
+    return this.userService.findById(request);
+  }
 }

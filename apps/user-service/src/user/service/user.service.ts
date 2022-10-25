@@ -8,7 +8,7 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {
   }
 
-  async create(dto: UserProto.UserCreateDto): Promise<UserProto.UserCreateAck> {
+  async create(dto: UserProto.CreateDto): Promise<UserProto.CreateAck> {
     const isNicknameTaken = await this.userRepository.isNicknameTaken(dto.nickname);
     if (isNicknameTaken) {
       throw new NicknameAlreadyTakenException();
@@ -24,6 +24,13 @@ export class UserService {
 
   async getUserForLogin(dto: UserProto.GetUserForLoginDto): Promise<UserProto.GetUserForLoginAck> {
     const user = await this.userRepository.getUserByNickname(dto.nickname, ["+password"]);
+    return {
+      user
+    };
+  }
+
+  async findById(dto: UserProto.FindByIdDto): Promise<UserProto.FindByIdAck> {
+    const user = await this.userRepository.findById(dto._id);
     return {
       user
     };
