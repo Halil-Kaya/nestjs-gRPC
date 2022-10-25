@@ -59,6 +59,12 @@
       ],
       "middlewares/middlewares/*": [
         "libs/middlewares/src/*"
+      ],
+      "interfaces/interfaces": [
+        "libs/interfaces/src"
+      ],
+      "interfaces/interfaces/*": [
+        "libs/interfaces/src/*"
       ]
     }
   }

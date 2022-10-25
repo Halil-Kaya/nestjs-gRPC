@@ -6,7 +6,7 @@ import { ErrorCodes } from "exceptions/exceptions";
 
 it("Should user get token", async () => {
 
-  const reqDto: UserProto.UserCreateDto = {
+  const reqDto: UserProto.CreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
     password: Math.random().toString(36).slice(2, 16)
@@ -14,7 +14,7 @@ it("Should user get token", async () => {
 
   const { data: data1, status: status1 } = await createUser(reqDto);
   expect(status1).toBe(201);
-  const res1 = <UserProto.UserCreateAck>data1.result;
+  const res1 = data1.result;
   expect(res1).toBeDefined();
 
   const reqDto2: AuthProto.LoginDto = {
@@ -22,7 +22,7 @@ it("Should user get token", async () => {
     password: reqDto.password
   };
   const { data: data2 } = await login(reqDto2);
-  const result = <AuthProto.LoginAck>data2.result;
+  const result = data2.result;
   expect(result).toBeDefined();
   expect(result.token).toBeDefined();
   const payload = JSON.parse(Buffer.from(result.token.split(".")[1], "base64").toString());
@@ -30,7 +30,7 @@ it("Should user get token", async () => {
 });
 
 it("should get invalid credentials error if password not match ", async () => {
-  const reqDto: UserProto.UserCreateDto = {
+  const reqDto: UserProto.CreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
     password: "123456"

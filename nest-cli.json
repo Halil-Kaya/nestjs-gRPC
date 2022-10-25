@@ -105,6 +105,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/middlewares/tsconfig.lib.json"
       }
+    },
+    "interfaces": {
+      "type": "library",
+      "root": "libs/interfaces",
+      "entryFile": "index",
+      "sourceRoot": "libs/interfaces/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/interfaces/tsconfig.lib.json"
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ import { MetaInterface } from "interceptors/interceptors";
 import { createUser } from "../../common/user.helpers";
 
 it("should create user", async () => {
-  const reqDto: UserProto.UserCreateDto = {
+  const reqDto: UserProto.CreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
     password: "123456"
@@ -12,7 +12,7 @@ it("should create user", async () => {
 
   const { status, data } = await createUser(reqDto);
   expect(status).toBe(201);
-  const result = <UserProto.UserCreateAck>data.result;
+  const result = data.result;
   expect(result.fullName).toBe(reqDto.fullName);
   expect(result.nickname).toBe(reqDto.nickname);
   expect(result._id).toBeDefined();
@@ -20,13 +20,13 @@ it("should create user", async () => {
 });
 
 it("should throw error if nickname is taken", async () => {
-  const reqDto: UserProto.UserCreateDto = {
+  const reqDto: UserProto.CreateDto = {
     fullName: "test name",
     nickname: Math.random().toString(36).slice(2, 16),
     password: "123456"
   };
 
-  const { status, data } = await createUser(reqDto);
+  const { status } = await createUser(reqDto);
   expect(status).toBe(201);
 
   try {
