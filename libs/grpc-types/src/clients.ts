@@ -1,7 +1,11 @@
 import { join } from "path";
 import { AuthProto, TodoProto, UserProto } from "grpc-types/grpc-types/index";
 import { Transport } from "@nestjs/microservices";
-import { AuthConfig, TodoConfig, UserConfig } from "grpc-types/grpc-types/config";
+import {
+  AuthConfig,
+  TodoConfig,
+  UserConfig
+} from "grpc-types/grpc-types/config";
 
 export const AuthClient: any = {
   name: AuthProto.AUTH_PACKAGE_NAME,

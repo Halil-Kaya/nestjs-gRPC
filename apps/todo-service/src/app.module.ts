@@ -1,14 +1,10 @@
-import { Module } from "@nestjs/common";
-import { TodoModule } from "./todo/todo.module";
-import { MongooseModule } from "@nestjs/mongoose";
+import { Module } from '@nestjs/common';
+import { TodoModule } from './todo/todo.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [
-    TodoModule,
-    MongooseModule.forRoot("mongodb://localhost:27016")
-  ],
+  imports: [TodoModule, MongooseModule.forRoot('mongodb://mongo:27017')],
   controllers: [],
-  providers: []
+  providers: [],
 })
-export class AppModule {
-}
+export class AppModule {}

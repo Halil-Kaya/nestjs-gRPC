@@ -1,2 +1,2 @@
-export * from "./transform.interceptor";
-export * from "./grpc-log.interceptor";
+export * from './transform.interceptor';
+export * from './grpc-log.interceptor';

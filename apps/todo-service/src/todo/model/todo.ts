@@ -1,11 +1,11 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Schema as MongooseSchema, Types } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type TodoDocument = Todo & Document;
 
 @Schema({
   versionKey: false,
-  id: true
+  id: true,
 })
 export class Todo {
   @Prop({ type: MongooseSchema.Types.ObjectId, default: Types.ObjectId })
@@ -14,18 +14,18 @@ export class Todo {
   id: string;
 
   @Prop({
-    type: String
+    type: String,
   })
   title: string;
 
   @Prop({
-    type: String
+    type: String,
   })
   content: string;
 
   @Prop({
     type: String,
-    required: true
+    required: true,
   })
   userId: string;
 

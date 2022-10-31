@@ -1,3 +1,3 @@
 export enum StrategyType {
-  JWT = "JWT"
+  JWT = 'JWT',
 }

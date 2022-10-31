@@ -1,11 +1,6 @@
-import {
-  ExceptionFilter,
-  ArgumentsHost,
-  Catch,
-  Logger
-} from "@nestjs/common";
-import { GeneralServerErrorException } from "exceptions/exceptions";
-import { GrpcMetadataErrorKey } from "grpc-types/grpc-types";
+import { ExceptionFilter, ArgumentsHost, Catch, Logger } from '@nestjs/common';
+import { GeneralServerErrorException } from 'exceptions/exceptions';
+import { GrpcMetadataErrorKey } from 'grpc-types/grpc-types';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -19,15 +14,21 @@ export class AllExceptionsFilter implements ExceptionFilter {
       try {
         exception = JSON.parse(exception.metadata.get(GrpcMetadataErrorKey)[0]);
       } catch (e) {
-        this.logger.error(`[GRPC UNHANDLED ERROR]: [${exception?.message}] :-> `, JSON.stringify(exception));
+        this.logger.error(
+          `[GRPC UNHANDLED ERROR]: [${exception?.message}] :-> `,
+          JSON.stringify(exception),
+        );
         exception = new GeneralServerErrorException();
       }
     } else if (!exception.isCustomError) {
-      this.logger.error(`[UNHANDLED ERROR]: [${exception?.message}] :-> `, JSON.stringify(exception));
+      this.logger.error(
+        `[UNHANDLED ERROR]: [${exception?.message}] :-> `,
+        JSON.stringify(exception),
+      );
       exception = new GeneralServerErrorException();
     } else {
       this.logger.error(
-        `[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`
+        `[ERROR:${exception.errorCode}] ${exception.message.toUpperCase()}`,
       );
     }
     response.status(500).json({
@@ -37,9 +38,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
         status: request.status,
         errorCode: exception.errorCode,
         errorMessage: exception.message,
-        timestamp: new Date()
+        timestamp: new Date(),
       },
-      result: exception
+      result: exception,
     });
   }
 }

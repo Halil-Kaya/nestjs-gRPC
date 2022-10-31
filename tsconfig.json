@@ -18,54 +18,22 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "exceptions/exceptions": [
-        "libs/exceptions/src"
-      ],
-      "exceptions/exceptions/*": [
-        "libs/exceptions/src/*"
-      ],
-      "core/core": [
-        "libs/core/src"
-      ],
-      "core/core/*": [
-        "libs/core/src/*"
-      ],
-      "proto/proto": [
-        "libs/proto/src"
-      ],
-      "proto/proto/*": [
-        "libs/proto/src/*"
-      ],
-      "grpc-types/grpc-types": [
-        "libs/grpc-types/src"
-      ],
-      "grpc-types/grpc-types/*": [
-        "libs/grpc-types/src/*"
-      ],
-      "filters/filters": [
-        "libs/filters/src"
-      ],
-      "filters/filters/*": [
-        "libs/filters/src/*"
-      ],
-      "interceptors/interceptors": [
-        "libs/interceptors/src"
-      ],
-      "interceptors/interceptors/*": [
-        "libs/interceptors/src/*"
-      ],
-      "middlewares/middlewares": [
-        "libs/middlewares/src"
-      ],
-      "middlewares/middlewares/*": [
-        "libs/middlewares/src/*"
-      ],
-      "interfaces/interfaces": [
-        "libs/interfaces/src"
-      ],
-      "interfaces/interfaces/*": [
-        "libs/interfaces/src/*"
-      ]
+      "exceptions/exceptions": ["libs/exceptions/src"],
+      "exceptions/exceptions/*": ["libs/exceptions/src/*"],
+      "core/core": ["libs/core/src"],
+      "core/core/*": ["libs/core/src/*"],
+      "proto/proto": ["libs/proto/src"],
+      "proto/proto/*": ["libs/proto/src/*"],
+      "grpc-types/grpc-types": ["libs/grpc-types/src"],
+      "grpc-types/grpc-types/*": ["libs/grpc-types/src/*"],
+      "filters/filters": ["libs/filters/src"],
+      "filters/filters/*": ["libs/filters/src/*"],
+      "interceptors/interceptors": ["libs/interceptors/src"],
+      "interceptors/interceptors/*": ["libs/interceptors/src/*"],
+      "middlewares/middlewares": ["libs/middlewares/src"],
+      "middlewares/middlewares/*": ["libs/middlewares/src/*"],
+      "interfaces/interfaces": ["libs/interfaces/src"],
+      "interfaces/interfaces/*": ["libs/interfaces/src/*"]
     }
   }
 }

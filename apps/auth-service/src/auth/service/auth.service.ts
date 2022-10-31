@@ -1,47 +1,54 @@
-import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
-import { AuthProto, UserProto } from "grpc-types/grpc-types";
-import { ClientGrpc } from "@nestjs/microservices";
-import { InvalidCredentialsException } from "exceptions/exceptions";
-import { JwtService } from "@nestjs/jwt";
-import { firstValueFrom } from "rxjs";
-import * as bcrypt from "bcrypt";
-import { SanitizedUser } from "interfaces/interfaces";
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { AuthProto, UserProto } from 'grpc-types/grpc-types';
+import { ClientGrpc } from '@nestjs/microservices';
+import { InvalidCredentialsException } from 'exceptions/exceptions';
+import { JwtService } from '@nestjs/jwt';
+import { firstValueFrom } from 'rxjs';
+import * as bcrypt from 'bcrypt';
+import { SanitizedUser } from 'interfaces/interfaces';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
   private userService: UserProto.UserServiceClient;
 
-  constructor(@Inject(UserProto.USER_PACKAGE_NAME) private client: ClientGrpc,
-              private readonly jwtService: JwtService) {
-  }
+  constructor(
+    @Inject(UserProto.USER_PACKAGE_NAME) private client: ClientGrpc,
+    private readonly jwtService: JwtService,
+  ) {}
 
   onModuleInit() {
-    this.userService = this.client.getService<UserProto.UserServiceClient>(UserProto.USER_SERVICE_NAME);
+    this.userService = this.client.getService<UserProto.UserServiceClient>(
+      UserProto.USER_SERVICE_NAME,
+    );
   }
 
   async login(dto: AuthProto.LoginDto): Promise<AuthProto.LoginAck> {
     const { nickname, password } = dto;
-    const { user } = await firstValueFrom(this.userService.getUserForLogin({ nickname }));
+    const { user } = await firstValueFrom(
+      this.userService.getUserForLogin({ nickname }),
+    );
     if (!user || Object.keys(user).length === 0) {
       throw new InvalidCredentialsException();
     }
-    const isPasswordMatch: boolean = await AuthService.checkPasswordMatch(password, user.password);
+    const isPasswordMatch: boolean = await AuthService.checkPasswordMatch(
+      password,
+      user.password,
+    );
     if (!isPasswordMatch) {
       throw new InvalidCredentialsException();
     }
     return {
-      token: this.jwtService.sign(this.getPayload(user))
+      token: this.jwtService.sign(this.getPayload(user)),
     };
   }
 
   private getPayload(user: UserProto.User): SanitizedUser {
     return <SanitizedUser>{
-      _id: user._id
+      _id: user._id,
     };
   }
 
   private static checkPasswordMatch(password, realPassword): Promise<boolean> {
     return bcrypt.compare(password, realPassword);
   }
-
 }

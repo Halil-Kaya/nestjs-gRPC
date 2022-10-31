@@ -5,9 +5,7 @@
   "monorepo": true,
   "root": "apps/api-gateway",
   "compilerOptions": {
-    "assets": [
-      "**/*.proto"
-    ],
+    "assets": ["**/*.proto"],
     "watchAssets": true,
     "webpack": true
   },

@@ -1,13 +1,13 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Schema as MongooseSchema, Types } from "mongoose";
-import { hashSync } from "bcryptjs";
-import { IUser } from "interfaces/interfaces/IUser";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
+import { hashSync } from 'bcryptjs';
+import { IUser } from 'interfaces/interfaces/IUser';
 
 export type UserDocument = User & Document;
 
 @Schema({
   versionKey: false,
-  id: true
+  id: true,
 })
 export class User implements IUser {
   @Prop({ type: MongooseSchema.Types.ObjectId, default: Types.ObjectId })
@@ -32,7 +32,7 @@ export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ nickname: 1 });
 
 export function preSave(next: any) {
-  if (!this.isModified("password")) {
+  if (!this.isModified('password')) {
     return next();
   }
   this.password = hashSync(this.password, 12);

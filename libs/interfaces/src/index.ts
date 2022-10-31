@@ -1,1 +1,1 @@
-export * from "./sanitized-user";
+export * from './sanitized-user';

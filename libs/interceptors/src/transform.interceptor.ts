@@ -1,6 +1,12 @@
-import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from "@nestjs/common";
-import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  Logger,
+  NestInterceptor,
+} from '@nestjs/common';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface MetaInterface {
   headers: any;
@@ -16,15 +22,16 @@ export interface Response<T> {
 }
 
 @Injectable()
-export class TransformInterceptor
-  implements NestInterceptor {
-  private logger = new Logger("HTTP");
+export class TransformInterceptor implements NestInterceptor {
+  private logger = new Logger('HTTP');
 
   intercept(
     context: ExecutionContext,
-    next: CallHandler
+    next: CallHandler,
   ): Observable<Response<any>> {
-    const { method, url, body, headers, params, status } = context.switchToHttp().getRequest();
+    const { method, url, body, headers, params, status } = context
+      .switchToHttp()
+      .getRequest();
     this.logger.log(`REQ [${method} ${url}]:-> ${JSON.stringify(body)}`);
     return next.handle().pipe(
       map((data) => {
@@ -33,13 +40,13 @@ export class TransformInterceptor
             headers: headers,
             params: params,
             status: status,
-            timestamp: new Date()
+            timestamp: new Date(),
           },
-          result: data
+          result: data,
         };
         this.logger.log(`RES [${method} ${url}] :-> ${JSON.stringify(res)}`);
         return res;
-      })
+      }),
     );
   }
 }
