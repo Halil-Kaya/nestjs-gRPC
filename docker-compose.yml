@@ -22,7 +22,7 @@ services:
       - app-net
     environment:
       - APP_NAME=api-gateway
-    command: ['./docker/init.sh']
+    command: './init.sh'
 
   auth-service:
     image: base-node
@@ -30,7 +30,7 @@ services:
       - app-net
     environment:
       - APP_NAME=auth-service
-    command: ['./docker/init.sh']
+    command: './init.sh'
 
   user-service:
     image: base-node
@@ -38,7 +38,7 @@ services:
       - app-net
     environment:
       - APP_NAME=user-service
-    command: ['./docker/init.sh']
+    command: './init.sh'
 
   todo-service:
     image: base-node
@@ -46,7 +46,7 @@ services:
       - app-net
     environment:
       - APP_NAME=todo-service
-    command: ['./docker/init.sh']
+    command: './init.sh'
 
 networks:
   app-net:
