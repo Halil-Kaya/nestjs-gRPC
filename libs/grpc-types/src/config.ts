@@ -11,7 +11,7 @@ export const AuthConfig = {
 };
 
 export const UserConfig = {
-  hostname: 'user-service',
+  hostname: "user-service",
   port: 5056,
   path: './../../user.proto',
   loader: {
