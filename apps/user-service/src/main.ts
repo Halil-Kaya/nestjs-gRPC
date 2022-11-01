@@ -4,6 +4,7 @@ import { MicroserviceOptions } from '@nestjs/microservices';
 import { GrpcClients } from 'grpc-types/grpc-types';
 
 async function bootstrap() {
+  global.NODE_ID = `NODE_ID # ${(Math.random() * 10).toFixed(0)}`;
   const app = await NestFactory.create(AppModule);
   await app.init();
   app.connectMicroservice<MicroserviceOptions>(GrpcClients.UserClient);

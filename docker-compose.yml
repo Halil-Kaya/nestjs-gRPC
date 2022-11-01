@@ -7,13 +7,6 @@ services:
       context: .
       dockerfile: Dockerfile
 
-  mongo:
-    image: mongo
-    ports:
-      - 27016:27017
-    networks:
-      - app-net
-
   gateway:
     image: base-node
     ports:
@@ -24,28 +17,12 @@ services:
       - APP_NAME=api-gateway
     command: './init.sh'
 
-  auth-service:
-    image: base-node
-    networks:
-      - app-net
-    environment:
-      - APP_NAME=auth-service
-    command: './init.sh'
-
   user-service:
     image: base-node
     networks:
       - app-net
     environment:
       - APP_NAME=user-service
-    command: './init.sh'
-
-  todo-service:
-    image: base-node
-    networks:
-      - app-net
-    environment:
-      - APP_NAME=todo-service
     command: './init.sh'
 
 networks:

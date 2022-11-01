@@ -1,27 +1,37 @@
 import { Controller, UseFilters, UseInterceptors } from '@nestjs/common';
-import { UserService } from '../service/user.service';
 import { UserProto } from 'grpc-types/grpc-types';
 import { GrpcAllExceptionsFilter } from 'filters/filters';
 import { GrpcLogInterceptor } from 'interceptors/interceptors';
+import { Observable } from 'rxjs';
 
 @UseFilters(GrpcAllExceptionsFilter)
 @UseInterceptors(GrpcLogInterceptor)
 @Controller('user')
 @UserProto.UserServiceControllerMethods()
 export class UserController implements UserProto.UserServiceController {
-  constructor(private readonly userService: UserService) {}
-
-  async create(data: UserProto.CreateDto): Promise<UserProto.CreateAck> {
-    return this.userService.create(data);
-  }
-
+  constructor() {}
   getUserForLogin(
     request: UserProto.GetUserForLoginDto,
-  ): Promise<UserProto.GetUserForLoginAck> {
-    return this.userService.getUserForLogin(request);
+  ):
+    | UserProto.GetUserForLoginAck
+    | Promise<UserProto.GetUserForLoginAck>
+    | Observable<UserProto.GetUserForLoginAck> {
+    throw new Error('Method not implemented.');
+  }
+  findById(
+    request: UserProto.FindByIdDto,
+  ):
+    | UserProto.FindByIdAck
+    | Promise<UserProto.FindByIdAck>
+    | Observable<UserProto.FindByIdAck> {
+    throw new Error('Method not implemented.');
   }
 
-  findById(request: UserProto.FindByIdDto): Promise<UserProto.FindByIdAck> {
-    return this.userService.findById(request);
+  async create(data: UserProto.CreateDto): Promise<UserProto.CreateAck> {
+    return {
+      _id: global.NODE_ID,
+      createdAt: 1,
+      ...data,
+    };
   }
 }
