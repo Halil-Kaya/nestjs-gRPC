@@ -19,6 +19,8 @@ services:
 
   user-service:
     image: base-node
+    ports:
+      - 3033:3033
     networks:
       - app-net
     environment:
