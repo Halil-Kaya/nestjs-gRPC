@@ -1,7 +1,9 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { MicroserviceOptions } from "@nestjs/microservices";
-import { GrpcClients } from "grpc-types/grpc-types";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { MicroserviceOptions } from '@nestjs/microservices';
+import { GrpcClients } from 'grpc-types/grpc-types';
 
 async function bootstrap() {
   global.NODE_ID = `NODE_ID # ${(Math.random() * 10).toFixed(0)}`;
@@ -9,10 +11,12 @@ async function bootstrap() {
   await app.init();
   app.connectMicroservice<MicroserviceOptions>(GrpcClients.UserClient);
   await app.startAllMicroservices();
-  await app.listen(3033);
+  await app.listen(process.env.PORT);
   return app;
 }
 
 bootstrap().then(async (app) => {
-  console.log(`user-service microservice is running on : ${await app.getUrl()}`);
+  console.log(
+    `user-service microservice is running on : ${await app.getUrl()}`,
+  );
 });

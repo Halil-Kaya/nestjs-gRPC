@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+
+service UserService{
+  rpc Create(CreateDto) returns (CreateAck){};
+  rpc GetUserForLogin(GetUserForLoginDto) returns(GetUserForLoginAck){};
+  rpc FindById(FindByIdDto) returns(FindByIdAck){};
+}
+
+// <-- FindById
+message FindByIdDto{
+  string _id = 1;
+}
+
+message FindByIdAck{
+  User user = 1;
+}
+// FindById -->
+
+// <-- GetUserForLogin
+message GetUserForLoginDto{
+  string nickname = 1;
+}
+
+message GetUserForLoginAck{
+  User user = 1;
+}
+// GetUserForLogin -->
+
+// <-- create
+message CreateDto{
+  string fullName = 1;
+  string nickname = 2;
+  string password = 3;
+}
+
+message CreateAck{
+  string _id = 1;
+  string fullName = 2;
+  string nickname = 3;
+  int32 createdAt = 5;
+}
+
+// create -->
+
+// <-- common section
+message User{
+  string _id = 1;
+  string fullName = 2;
+  string nickname = 3;
+  optional string password = 4;
+  int32 createdAt = 6;
+}
+
+// common section -->
