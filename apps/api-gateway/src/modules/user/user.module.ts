@@ -4,7 +4,7 @@ import { UserController } from './user.controller';
 import { GrpcClients } from 'grpc-types/grpc-types';
 
 @Module({
-  imports: [ClientsModule.register([GrpcClients.UserClient])],
+  imports: [ClientsModule.register([GrpcClients.UserGrpcClient])],
   controllers: [UserController],
   providers: [],
 })

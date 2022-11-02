@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(process.env.PORT);
+  await app.listen(3003, '0.0.0.0');
   return app;
 }
 

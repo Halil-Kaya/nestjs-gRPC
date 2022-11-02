@@ -9,9 +9,9 @@ async function bootstrap() {
   global.NODE_ID = `NODE_ID # ${(Math.random() * 10).toFixed(0)}`;
   const app = await NestFactory.create(AppModule);
   await app.init();
-  app.connectMicroservice<MicroserviceOptions>(GrpcClients.UserClient);
+  app.connectMicroservice<MicroserviceOptions>(GrpcClients.UserGrpcServer);
   await app.startAllMicroservices();
-  await app.listen(process.env.PORT);
+  await app.listen(4040);
   return app;
 }
 

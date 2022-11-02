@@ -4,8 +4,6 @@ const createOptions = (APP) => {
     script: './dist/apps/' + APP + '/main.js',
     instances: 1,
     autorestart: true,
-    error_file: '/app/log/pm2_' + APP + '_error.log',
-    out_file: '/app/log/pm2_' + APP + '_out.log',
     max_memory_restart: '4G',
     env_production: {
       APP,

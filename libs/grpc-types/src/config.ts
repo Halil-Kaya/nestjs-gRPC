@@ -11,7 +11,8 @@ export const AuthConfig = {
 };
 
 export const UserConfig = {
-  hostname: process.env.SERVICE_HOST,
+  hostname: process.env.GRPC_HOST,
+  server: process.env.SERVICE_HOST,
   port: process.env.SERVICE_PORT,
   path: './../../../user.proto',
   loader: {
