@@ -13,7 +13,7 @@ export const AuthConfig = {
 export const UserConfig = {
   hostname: process.env.SERVICE_HOST,
   port: process.env.SERVICE_PORT,
-  path: './../user.proto',
+  path: './../../../user.proto',
   loader: {
     keepCase: true,
     longs: Number,
