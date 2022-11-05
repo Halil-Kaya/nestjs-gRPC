@@ -1,15 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from '../model/user';
-import { Model } from 'mongoose';
-import { UserProto } from 'grpc-types/grpc-types';
-import { IUser } from 'interfaces/interfaces/IUser';
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { User, UserDocument } from "../model/user";
+import { Model } from "mongoose";
+import { UserProto } from "grpc-types/grpc-types";
+import { IUser } from "interfaces/interfaces/IUser";
 
 @Injectable()
 export class UserRepository {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
-  ) {}
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>
+  ) {
+  }
 
   async create(dto: UserProto.CreateDto): Promise<User> {
     const user = new this.userModel(dto);
@@ -22,7 +23,7 @@ export class UserRepository {
 
   async isNicknameTaken(nickname: string): Promise<boolean> {
     const count = await this.userModel.count({
-      nickname,
+      nickname
     });
     return count > 0;
   }

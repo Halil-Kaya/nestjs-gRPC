@@ -23,6 +23,9 @@ services:
     environment:
       - APP_NAME=api-gateway
     command: './init.sh'
+    volumes:
+      - "./apps:/project/apps:ro"
+      - "./libs:/project/libs:ro"
 
   auth-service:
     image: base-node
@@ -31,6 +34,9 @@ services:
     environment:
       - APP_NAME=auth-service
     command: './init.sh'
+    volumes:
+      - "./apps:/project/apps:ro"
+      - "./libs:/project/libs:ro"
 
   user-service:
     image: base-node
@@ -39,6 +45,9 @@ services:
     environment:
       - APP_NAME=user-service
     command: './init.sh'
+    volumes:
+      - "./apps:/project/apps:ro"
+      - "./libs:/project/libs:ro"
 
   todo-service:
     image: base-node
@@ -47,6 +56,9 @@ services:
     environment:
       - APP_NAME=todo-service
     command: './init.sh'
+    volumes:
+      - "./apps:/project/apps:ro"
+      - "./libs:/project/libs:ro"
 
 networks:
   app-net:

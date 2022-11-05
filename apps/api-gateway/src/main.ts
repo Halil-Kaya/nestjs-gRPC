@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { AllExceptionsFilter } from 'filters/filters';
-import { TransformInterceptor } from 'interceptors/interceptors';
-import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { AllExceptionsFilter } from "filters/filters";
+import { TransformInterceptor } from "interceptors/interceptors";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,5 +14,5 @@ async function bootstrap() {
 }
 
 bootstrap().then(async (app) => {
-  console.log(`app is running on : ${await app.getUrl()}`);
+  console.log(`gateway is running on : ${await app.getUrl()}`);
 });

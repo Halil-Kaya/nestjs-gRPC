@@ -4,4 +4,4 @@ cd project
 
 npm run proto-generate
 
-npm run start $APP_NAME
+npm run start:dev $APP_NAME
