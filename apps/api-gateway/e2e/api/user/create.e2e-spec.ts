@@ -1,13 +1,13 @@
-import { UserProto } from "grpc-types/grpc-types";
-import { ErrorCodes } from "exceptions/exceptions";
-import { MetaInterface } from "interceptors/interceptors";
-import { createUser } from "../../common/user.helpers";
+import { UserProto } from 'grpc-types/grpc-types';
+import { ErrorCodes } from 'exceptions/exceptions';
+import { MetaInterface } from 'interceptors/interceptors';
+import { createUser } from '../../common/user.helpers';
 
-it("should create user", async () => {
+it('should create user', async () => {
   const reqDto: UserProto.CreateDto = {
-    fullName: "test name",
+    fullName: 'test name',
     nickname: Math.random().toString(36).slice(2, 16),
-    password: "123456"
+    password: '123456',
   };
 
   const { status, data } = await createUser(reqDto);
@@ -19,11 +19,11 @@ it("should create user", async () => {
   expect(result.createdAt).toBeDefined();
 });
 
-it("should throw error if nickname is taken", async () => {
+it('should throw error if nickname is taken', async () => {
   const reqDto: UserProto.CreateDto = {
-    fullName: "test name",
+    fullName: 'test name',
     nickname: Math.random().toString(36).slice(2, 16),
-    password: "123456"
+    password: '123456',
   };
 
   const { status } = await createUser(reqDto);
